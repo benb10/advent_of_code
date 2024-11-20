@@ -1,25 +1,25 @@
 from pathlib import Path
 
-import p01a
-import p01b
+import p01_a
+import p01_b
 
 
-def test_p1a_small():
+def test_p01a_small():
     s = """1abc2
     pqr3stu8vwx
     a1b2c3d4e5f
     treb7uchet"""
 
-    assert p01a.run(s) == 142
+    assert p01_a.run(s) == 142
 
 
-def test_p1a():
+def test_p01a():
     s = Path("p01_input.txt").read_text()
 
-    assert p01a.run(s) == 55_607
+    assert p01_a.run(s) == 55_607
 
 
-def test_p1b_small():
+def test_p01b_small():
     s = """two1nine
     eightwothree
     abcone2threexyz
@@ -28,10 +28,10 @@ def test_p1b_small():
     zoneight234
     7pqrstsixteen"""
 
-    assert p01b.run(s) == 281
+    assert p01_b.run(s) == 281
 
 
-def test_p1b():
+def test_p01b():
     s = Path("p01_input.txt").read_text()
 
-    assert p01b.run(s) == 55291
+    assert p01_b.run(s) == 55291
