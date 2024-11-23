@@ -27,12 +27,6 @@ def get_num_steps(nums):
     return num_steps
 
 
-def run(i):
-    nums = clean_input(i)
-
-    return get_num_steps(nums)
-
-
 def run(s: str) -> int:
     nums = clean_input(s)
 

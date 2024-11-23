@@ -38,5 +38,5 @@ grid = get_grid(18, 50)
 
 
 def run(s: str) -> int:
-    grid = get_grid(18, 50)
+    # grid = get_grid(18, 50)
     return 0
