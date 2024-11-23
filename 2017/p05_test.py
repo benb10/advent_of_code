@@ -1,9 +1,8 @@
 from pathlib import Path
 
-import pytest
-
 import p05_a
 import p05_b
+import pytest
 
 
 def test_p05a_small():
@@ -34,4 +33,3 @@ def test_p05b():
     s = Path("p05_input.txt").read_text()
 
     assert p05_b.run(s) == 1
-

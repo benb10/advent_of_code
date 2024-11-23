@@ -1,19 +1,16 @@
 def crab_fuel_required(distance: int) -> int:
     return distance * (distance + 1) // 2
 
+
 def get_fuel_req(x, locations):
-    return sum(
-        crab_fuel_required(abs(x - location))
-        for location in locations
-    )
+    return sum(crab_fuel_required(abs(x - location)) for location in locations)
+
 
 def run(s: str) -> int:
     locations = [int(x) for x in s.split(",")]
 
     min_location = min(locations)
     max_location = max(locations)
-
-
 
     position_to_fuel = {}
 

@@ -1,12 +1,10 @@
 from typing import List
 
-class Disc():
 
-
+class Disc:
     def __init__(self, num_positions, inital_position):
         self.num_positions = num_positions
         self.inital_position = inital_position
-
 
     def ball_will_pass(self, time: int) -> bool:
         return (self.inital_position + time) % self.num_positions == 0
@@ -15,7 +13,6 @@ class Disc():
 discs = []
 
 for line in s.strip().split("\n"):
-
     num_positions = int(line.split(" positions; ")[0].split(" ")[-1])
     inital_position = int(line.split(" ")[-1].replace(".", ""))
 
@@ -28,10 +25,7 @@ for line in s.strip().split("\n"):
 
 
 def drop_ball(drop_time: int, discs: List[Disc]) -> None:
-
-
     for i, disc in enumerate(discs):
-
         time = drop_time + i + 1
 
         if disc.ball_will_pass(time):
@@ -41,7 +35,6 @@ def drop_ball(drop_time: int, discs: List[Disc]) -> None:
             return
 
     print(f"Ball has passed all the way through!  drop_time {drop_time}")
-
 
 
 for time in range(1000000000):

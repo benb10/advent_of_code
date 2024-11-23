@@ -1,11 +1,10 @@
 def clean_input(i):
-    return [int(x) for x in i.strip().split('\n')]
+    return [int(x) for x in i.strip().split("\n")]
 
 
 def print_status(nums, position):
     strs = [f"({num})" if i == position else f" {num} " for i, num in enumerate(nums)]
     print("".join(strs))
-
 
 
 def get_num_steps(nums):
@@ -14,8 +13,6 @@ def get_num_steps(nums):
     print_status(nums, position)
 
     while True:
-
-
         if position >= len(nums):
             break
 
@@ -30,11 +27,11 @@ def get_num_steps(nums):
     return num_steps
 
 
-
 def run(i):
     nums = clean_input(i)
 
     return get_num_steps(nums)
+
 
 def run(s: str) -> int:
     nums = clean_input(s)

@@ -1,6 +1,3 @@
-
-
-
 def get_cell_power(x, y, serial_number):
     rack_id = x + 10
     power_level = rack_id * y
@@ -9,7 +6,6 @@ def get_cell_power(x, y, serial_number):
     power_level = power_level // 100 % 10  # get hundreds digit
     power_level -= 5
     return power_level
-
 
 
 def get_grid(serial_number, size):
@@ -29,6 +25,7 @@ def get_grid(serial_number, size):
 def get_sub_grid(grid, tl_coord, size):
     pass
 
+
 def print_grid(grid):
     column_width = 3  # assumes all 1 digit numbers, possibly negative
     for row in grid:
@@ -36,8 +33,8 @@ def print_grid(grid):
             print(str(num).rjust(column_width), end="")
         print("")
 
-grid = get_grid(18, 50)
 
+grid = get_grid(18, 50)
 
 
 def run(s: str) -> int:

@@ -1,9 +1,8 @@
 from pathlib import Path
 
-import pytest
-
 import p07_a
 import p07_b
+import pytest
 
 
 @pytest.mark.skip("solution not complete")
@@ -32,4 +31,3 @@ def test_p07b():
     s = Path("p07_input.txt").read_text()
 
     assert p07_b.run(s) == 1
-
