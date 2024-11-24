@@ -43,10 +43,8 @@ def get_paths(s):
             if not is_valid(new_path):
                 continue
             if new_path[-1] == "end":
-                # print("compelte", new_path)
                 complete_paths.append(new_path)
             else:
-                # print("incompelte", new_path)
                 incomplete_paths.append(new_path)
 
     return complete_paths

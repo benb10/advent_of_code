@@ -43,5 +43,4 @@ def run(s: str) -> int:
             if not ok:
                 break
 
-    print(score)
     return score

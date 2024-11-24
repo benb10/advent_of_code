@@ -29,5 +29,4 @@ def run(s: str) -> int:
     fn = fold_x if type == "x" else fold_y
 
     pts = fn(pts, fold)
-    print(len(pts))
     return len(pts)

@@ -81,7 +81,6 @@ def run(s: str) -> int:
         hands.append((cards, int(num_str)))
 
     hands.sort(key=get_hand_sort_key)
-    print(hands)
     total = 0
     for i, (_, num) in enumerate(hands, 1):
         total += i * num

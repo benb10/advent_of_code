@@ -11,7 +11,6 @@ def get_fuel_req(n):
             break
         fuel_sum += sf
         n = sf
-        print(n)
 
     return fuel_sum
 

@@ -58,7 +58,6 @@ def run(s: str) -> int:
     pt_to_best_cost = {(0, 0): 0}
 
     while True:
-        print(len(options), len(max(options, key=lambda o: len(o.path)).path))
         option = options.pop(0)
 
         e = option.path[-1]

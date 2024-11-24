@@ -21,9 +21,6 @@ def get_num_steps(nums):
         position += distance_to_move
         num_steps += 1
 
-        # print_status(nums, position)
-
-    print(num_steps)
     return num_steps
 
 
