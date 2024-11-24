@@ -8,8 +8,8 @@ TEST_CODE_TEMPLATE = """from pathlib import Path
 
 import pytest
 
-import p{problem_str}_a
-import p{problem_str}_b
+from . import p{problem_str}_a
+from . import p{problem_str}_b
 
 
 @pytest.mark.skip("solution not complete")
@@ -45,10 +45,10 @@ def test_p{problem_str}b():
 def create_files(year: int, problem_number: int) -> None:
     problem_str = str(problem_number).zfill(2)
     files = [
-        (f"{year}/p{problem_str}_a.py", SOLUTION_CODE_TEMPLATE),
-        (f"{year}/p{problem_str}_b.py", SOLUTION_CODE_TEMPLATE),
-        (f"{year}/p{problem_str}_input.txt", ""),
-        (f"{year}/p{problem_str}_test.py", TEST_CODE_TEMPLATE.format(problem_str=problem_str)),
+        (f"_{year}/p{problem_str}_a.py", SOLUTION_CODE_TEMPLATE),
+        (f"_{year}/p{problem_str}_b.py", SOLUTION_CODE_TEMPLATE),
+        (f"_{year}/p{problem_str}_input.txt", ""),
+        (f"_{year}/p{problem_str}_test.py", TEST_CODE_TEMPLATE.format(problem_str=problem_str)),
     ]
     for file_name, text in files:
         path = Path(__file__).parent / file_name
