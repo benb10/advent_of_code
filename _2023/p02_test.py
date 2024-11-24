@@ -1,7 +1,6 @@
 from pathlib import Path
 
-import p02_a
-import p02_b
+from . import p02_a, p02_b
 
 
 def test_p02a_small():
@@ -15,7 +14,7 @@ def test_p02a_small():
 
 
 def test_p02a():
-    s = Path("p02_input.txt").read_text()
+    s = (Path(__file__).parent / "p02_input.txt").read_text()
 
     assert p02_a.run(s) == 2720
 
@@ -31,6 +30,6 @@ def test_p02b_small():
 
 
 def test_p02b():
-    s = Path("p02_input.txt").read_text()
+    s = (Path(__file__).parent / "p02_input.txt").read_text()
 
     assert p02_b.run(s) == 71535

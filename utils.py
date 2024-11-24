@@ -21,7 +21,7 @@ def test_p{problem_str}a_small():
 
 @pytest.mark.skip("solution not complete")
 def test_p{problem_str}a():
-    s = Path("p{problem_str}_input.txt").read_text()
+    s = (Path(__file__).parent / "p{problem_str}_input.txt").read_text()
 
     assert p{problem_str}_a.run(s) == 1
 
@@ -35,7 +35,7 @@ def test_p{problem_str}b_small():
 
 @pytest.mark.skip("solution not complete")
 def test_p{problem_str}b():
-    s = Path("p{problem_str}_input.txt").read_text()
+    s = (Path(__file__).parent / "p{problem_str}_input.txt").read_text()
 
     assert p{problem_str}_b.run(s) == 1
 

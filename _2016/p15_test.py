@@ -1,8 +1,8 @@
 from pathlib import Path
 
-import p15_a
-import p15_b
 import pytest
+
+from . import p15_a, p15_b
 
 
 @pytest.mark.skip("solution not complete")
@@ -14,7 +14,7 @@ def test_p15a_small():
 
 @pytest.mark.skip("solution not complete")
 def test_p15a():
-    s = Path("p15_input.txt").read_text()
+    s = (Path(__file__).parent / "p15_input.txt").read_text()
 
     assert p15_a.run(s) == 1
 
@@ -28,6 +28,6 @@ def test_p15b_small():
 
 @pytest.mark.skip("solution not complete")
 def test_p15b():
-    s = Path("p15_input.txt").read_text()
+    s = (Path(__file__).parent / "p15_input.txt").read_text()
 
     assert p15_b.run(s) == 1

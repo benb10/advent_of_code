@@ -1,8 +1,8 @@
 from pathlib import Path
 
-import p07_a
-import p07_b
 import pytest
+
+from . import p07_a, p07_b
 
 
 @pytest.mark.skip("solution not complete")
@@ -18,7 +18,7 @@ def test_p07a_small():
 
 @pytest.mark.skip("solution not complete")
 def test_p07a():
-    s = Path("p07_input.txt").read_text()
+    s = (Path(__file__).parent / "p07_input.txt").read_text()
 
     assert p07_a.run(s) == 1
 
@@ -32,6 +32,6 @@ def test_p07b_small():
 
 @pytest.mark.skip("solution not complete")
 def test_p07b():
-    s = Path("p07_input.txt").read_text()
+    s = (Path(__file__).parent / "p07_input.txt").read_text()
 
     assert p07_b.run(s) == 1
