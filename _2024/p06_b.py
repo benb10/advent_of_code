@@ -79,8 +79,6 @@ def run(s: str) -> int:
     positions_to_check -= {(guard_start_r, guard_start_c)}
     total = 0
 
-    print("AAA", len(positions_to_check))
-
     for obstacle_r, obstacle_c in positions_to_check:
         new_rows = deepcopy(rows)
         row_to_change = new_rows[obstacle_r]
