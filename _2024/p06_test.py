@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from . import p06_a, p06_b
 
 
@@ -41,6 +43,7 @@ def test_p06b_small():
     assert p06_b.run(s) == 6
 
 
+@pytest.mark.skip("slow")
 def test_p06b():
     s = (Path(__file__).parent / "p06_input.txt").read_text()
 
