@@ -1,4 +1,7 @@
+import importlib
 from pathlib import Path
+from time import time
+from typing import Callable
 
 SOLUTION_CODE_TEMPLATE = """def run(s: str) -> int:
     lines = [line.strip() for line in s.strip().split("\\n")]
@@ -57,3 +60,24 @@ def create_files(year: int, problem_number: int) -> None:
 
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
+
+
+def get_function(year: int, day: int, part: str) -> Callable | None:
+    problem_num_str = str(day).zfill(2)
+    module = importlib.import_module(f"_{year}.p{problem_num_str}_test")
+    test_function_name = f"test_p{problem_num_str}{part}"
+    return getattr(module, test_function_name)
+
+
+def get_runtimes(year: int) -> None:
+    for day in range(1, 26):
+        for part in ("a", "b"):
+            try:
+                function = get_function(year, day, part)
+                start_time = time()
+                function()
+            except:  # noqa E722
+                continue
+            end_time = time()
+            runtime = round(end_time - start_time, 7)
+            print(f"year={year}, day={day}, part={part}, runtime={runtime}")
