@@ -1,4 +1,4 @@
-from collections import Counter, defaultdict
+from collections import defaultdict
 
 
 def check_is_start_of_file(file_blocks: list[int | None], idx: int) -> bool:
@@ -114,20 +114,12 @@ def run(s: str) -> int:
     length_to_gap_indexes = get_length_to_gap_indexes(file_blocks)
 
     moved_file_ids = set()
-    print()
 
     initial_len = len(file_blocks)
-    file_id_to_count = Counter(file_blocks)
 
     while True:
         assert len(file_blocks) == initial_len
-        # assert Counter(file_blocks) == file_id_to_count
-        # pp(file_blocks)
-        # print(file_blocks)
-        # a = length_to_gap_indexes
-        # b = get_length_to_gap_indexes(file_blocks[:idx_to_move_from])
-        # if a != b:
-        #     x=0
+
         if idx_to_move_from < 0:
             break
         while not check_is_start_of_file(file_blocks, idx_to_move_from):
@@ -147,7 +139,6 @@ def run(s: str) -> int:
             # there is no space to move this file to
             idx_to_move_from -= 1
             continue
-        # print(file_id)
 
         if not all(x is None for x in file_blocks[next_gap_index : next_gap_index + file_length]):
             raise ValueError("AAA")
@@ -166,10 +157,3 @@ def run(s: str) -> int:
             checksum += i * file_block
 
     return checksum
-
-
-if __name__ == "__main__":
-    from pathlib import Path
-
-    s = (Path(__file__).parent / "p09_input.txt").read_text()
-    print(run(s))

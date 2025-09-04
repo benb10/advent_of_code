@@ -57,12 +57,10 @@ def create_files(year: int, day: int) -> None:
         path = Path(__file__).parent / file_name
         if path.exists():
             print(f"skipping {path} because it already exists")
+            continue
 
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
-
-
-# create_files(2018, 2)
 
 
 def get_function(year: int, day: int, part: str) -> Callable | None:
