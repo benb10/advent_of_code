@@ -1,7 +1,11 @@
 def check_has_solution(result: int, nums: list[int]) -> bool:
     possible_answers = {nums[0]}
 
-    functions = [lambda a, b: a + b, lambda a, b: a * b, lambda a, b: int(str(a) + str(b))]
+    functions = [
+        lambda a, b: a + b,
+        lambda a, b: a * b,
+        lambda a, b: int(str(a) + str(b)),
+    ]
 
     for num in nums[1:]:
         new_possible_answers = set()

@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 
 def check_is_start_of_file(file_blocks: list[int | None], idx: int) -> bool:
@@ -53,7 +53,7 @@ def get_gap_length(file_blocks: list[int | None], idx: int) -> int:
     return length
 
 
-def get_length_to_gap_indexes(file_blocks: list[int | None]) -> dict[int : list[int]]:
+def get_length_to_gap_indexes(file_blocks: list[int | None]) -> dict[int, list[int]]:
     length_to_gap_indexes = defaultdict(list)
     for i, file_block in enumerate(file_blocks):
         if check_is_start_of_gap(file_blocks, i):
@@ -63,8 +63,12 @@ def get_length_to_gap_indexes(file_blocks: list[int | None]) -> dict[int : list[
     return length_to_gap_indexes
 
 
-def pop_next_gap_index(length_to_gap_indexes: dict[int : list[int]], length: int, idx_to_move_from: int) -> int | None:
+def pop_next_gap_index(length_to_gap_indexes: dict[int, list[int]], length: int, idx_to_move_from: int) -> int | None:
     max_length = 9  # since gap length is a digit
+
+    index_to_move_to = None
+    gap_length_to_move_to = None
+
     for gap_length in range(length, max_length + 1):
         gap_indexes = length_to_gap_indexes[gap_length]
         if gap_indexes:
@@ -72,15 +76,22 @@ def pop_next_gap_index(length_to_gap_indexes: dict[int : list[int]], length: int
             if next_gap_index > idx_to_move_from:
                 # we can't move forwards, only backwards
                 continue
+            if index_to_move_to is None or next_gap_index < index_to_move_to:
+                index_to_move_to = next_gap_index
+                gap_length_to_move_to = gap_length
 
-            gap_indexes.pop(0)
-            left_over_space = gap_length - length
-            if left_over_space:
-                left_over_start = next_gap_index + length
-                length_to_gap_indexes[left_over_space] = sorted(
-                    length_to_gap_indexes[left_over_space] + [left_over_start]
-                )
-            return next_gap_index
+    if not index_to_move_to:
+        # we couldn't find a place to move
+        return None
+
+    gap_indexes = length_to_gap_indexes[gap_length_to_move_to]
+    assert gap_indexes[0] == index_to_move_to
+    gap_indexes.pop(0)
+    left_over_space = gap_length_to_move_to - length
+    if left_over_space:
+        left_over_start = index_to_move_to + length
+        length_to_gap_indexes[left_over_space] = sorted(length_to_gap_indexes[left_over_space] + [left_over_start])
+    return index_to_move_to
 
 
 def pp(file_blocks):
@@ -104,7 +115,13 @@ def run(s: str) -> int:
 
     moved_file_ids = set()
     print()
+
+    initial_len = len(file_blocks)
+    file_id_to_count = Counter(file_blocks)
+
     while True:
+        assert len(file_blocks) == initial_len
+        # assert Counter(file_blocks) == file_id_to_count
         # pp(file_blocks)
         # print(file_blocks)
         # a = length_to_gap_indexes
@@ -151,11 +168,8 @@ def run(s: str) -> int:
     return checksum
 
 
-# not the right answer:
-# 6366116693035
-# 6363831070327
 if __name__ == "__main__":
     from pathlib import Path
 
     s = (Path(__file__).parent / "p09_input.txt").read_text()
-    run(s)
+    print(run(s))

@@ -45,13 +45,13 @@ def test_p{problem_str}b():
 """
 
 
-def create_files(year: int, problem_number: int) -> None:
-    problem_str = str(problem_number).zfill(2)
+def create_files(year: int, day: int) -> None:
+    day_str = str(day).zfill(2)
     files = [
-        (f"_{year}/p{problem_str}_a.py", SOLUTION_CODE_TEMPLATE),
-        (f"_{year}/p{problem_str}_b.py", SOLUTION_CODE_TEMPLATE),
-        (f"_{year}/p{problem_str}_input.txt", ""),
-        (f"_{year}/p{problem_str}_test.py", TEST_CODE_TEMPLATE.format(problem_str=problem_str)),
+        (f"_{year}/p{day_str}_a.py", SOLUTION_CODE_TEMPLATE),
+        (f"_{year}/p{day_str}_b.py", SOLUTION_CODE_TEMPLATE),
+        (f"_{year}/p{day_str}_input.txt", ""),
+        (f"_{year}/p{day_str}_test.py", TEST_CODE_TEMPLATE.format(problem_str=day_str)),
     ]
     for file_name, text in files:
         path = Path(__file__).parent / file_name
@@ -60,6 +60,9 @@ def create_files(year: int, problem_number: int) -> None:
 
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
+
+
+# create_files(2018, 2)
 
 
 def get_function(year: int, day: int, part: str) -> Callable | None:
