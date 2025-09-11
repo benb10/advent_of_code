@@ -5,29 +5,27 @@ import pytest
 from . import p11_a, p11_b
 
 
-@pytest.mark.skip("solution not complete")
 def test_p11a_small():
-    s = """"""
+    s = "42"
 
-    assert p11_a.run(s) == 1
+    assert p11_a.run(s) == "21,61"
 
 
-@pytest.mark.skip("solution not complete")
 def test_p11a():
     s = (Path(__file__).parent / "p11_input.txt").read_text()
 
-    assert p11_a.run(s) == 1
+    assert p11_a.run(s) == "243,43"
 
 
-@pytest.mark.skip("solution not complete")
+@pytest.mark.skip("slow")
 def test_p11b_small():
-    s = """"""
+    s = "18"
 
-    assert p11_b.run(s) == 1
+    assert p11_b.run(s) == "90,269,16"
 
 
-@pytest.mark.skip("solution not complete")
+@pytest.mark.skip("slow")
 def test_p11b():
     s = (Path(__file__).parent / "p11_input.txt").read_text()
 
-    assert p11_b.run(s) == 1
+    assert p11_b.run(s) == "236,151,15"

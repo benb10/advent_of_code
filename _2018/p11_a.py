@@ -1,42 +1,44 @@
-def get_cell_power(x, y, serial_number):
+def get_cell_power(x: int, y: int, grid_serial_number: int) -> int:
     rack_id = x + 10
     power_level = rack_id * y
-    power_level += serial_number
+    power_level += grid_serial_number
     power_level *= rack_id
     power_level = power_level // 100 % 10  # get hundreds digit
     power_level -= 5
     return power_level
 
 
-def get_grid(serial_number, size):
+def get_grid(grid_serial_number: int, size: int) -> list[list[int]]:
     grid = []
 
     for row_index in range(size):
         grid.append([])
         for column_index in range(size):
-            x = row_index + 1
-            y = column_index + 1
+            x = column_index + 1
+            y = row_index + 1
 
-            cell_power = get_cell_power(x, y, serial_number)
+            cell_power = get_cell_power(x, y, grid_serial_number)
             grid[-1].append(cell_power)
     return grid
 
 
-def get_sub_grid(grid, tl_coord, size):
-    pass
+def run(s: str) -> str:
+    grid_serial_number = int(s.strip())
+    grid_size = 300
+    grid = get_grid(grid_serial_number, grid_size)
 
+    max_power = -999999
+    max_power_x = None
+    max_power_y = None
 
-def print_grid(grid):
-    column_width = 3  # assumes all 1 digit numbers, possibly negative
-    for row in grid:
-        for num in row:
-            print(str(num).rjust(column_width), end="")
-        print("")
+    for row_index in range(grid_size - 2):
+        for column_index in range(grid_size - 2):
+            square_power = sum(
+                grid[a][b] for a in range(row_index, row_index + 3) for b in range(column_index, column_index + 3)
+            )
+            if square_power > max_power:
+                max_power = square_power
+                max_power_x = column_index + 1
+                max_power_y = row_index + 1
 
-
-grid = get_grid(18, 50)
-
-
-def run(s: str) -> int:
-    # grid = get_grid(18, 50)
-    return 0
+    return f"{max_power_x},{max_power_y}"

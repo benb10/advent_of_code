@@ -22,9 +22,7 @@ def run(s: str) -> int:
     for line in lines:
         open_brackets = []
 
-        ok = True
-
-        for i, char in enumerate(line):
+        for char in line:
             if char in open_to_closed:
                 open_brackets.append(char)
             elif char in closed_to_open:
@@ -34,13 +32,9 @@ def run(s: str) -> int:
                     open_brackets.pop(-1)
 
                 else:
-                    print(f"{i} Expected {expected} but found {char}")
                     score += illegal_char_to_score[char]
-                    ok = False
+                    break
             else:
                 raise ValueError(char)
-
-            if not ok:
-                break
 
     return score
