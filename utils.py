@@ -1,4 +1,5 @@
 import importlib
+from collections import defaultdict
 from pathlib import Path
 from time import time
 from typing import Callable
@@ -82,3 +83,45 @@ def get_runtimes(year: int) -> None:
             end_time = time()
             runtime = round(end_time - start_time, 7)
             print(f"year={year}, day={day}, part={part}, runtime={runtime}")
+
+
+def check_files():
+    directory = Path(__file__).parent
+    year_to_day_nums = defaultdict(set)
+
+    for file in directory.rglob("*.py"):
+        if not file.is_file():
+            continue
+
+        year_part = file.parts[-2]
+        is_year = len(year_part) > 1 and year_part[0] == "_" and year_part[1:].isdigit()
+        if not is_year:
+            continue
+
+        file_name = file.name
+        is_problem_file = (
+            file_name[0] == "p"
+            and file_name[1:3].isdigit()
+            and file_name[3] == "_"
+            and file_name[4] in ["a", "b"]
+            and file_name[5:] == ".py"
+        )
+        if not is_problem_file:
+            continue
+
+        year = int(year_part[1:])
+        day = int(file_name[1:3])
+        year_to_day_nums[year].add(day)
+
+    min_year = min(year_to_day_nums)
+    max_year = max(year_to_day_nums)
+
+    for year in range(min_year, max_year + 1):
+        day_nums = year_to_day_nums[year]
+        day_strs = [f"{day:2}" for day in sorted(day_nums)]
+        s = f"{year}: " + "  ".join(day_strs)
+        print(s)
+
+
+# create_files(2021, 4)
+# check_files()

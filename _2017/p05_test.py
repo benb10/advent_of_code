@@ -21,15 +21,18 @@ def test_p05a():
     assert p05_a.run(s) == 373543
 
 
-@pytest.mark.skip("solution not complete")
 def test_p05b_small():
-    s = """"""
+    s = """0
+    3
+    0
+    1
+    -3"""
 
-    assert p05_b.run(s) == 1
+    assert p05_b.run(s) == 10
 
 
-@pytest.mark.skip("solution not complete")
+@pytest.mark.skip("slow")
 def test_p05b():
     s = (Path(__file__).parent / "p05_input.txt").read_text()
 
-    assert p05_b.run(s) == 1
+    assert p05_b.run(s) == 27502966
