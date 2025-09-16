@@ -88,30 +88,40 @@ def get_runtimes(year: int) -> None:
 def check_files():
     directory = Path(__file__).parent
     year_to_day_nums = defaultdict(set)
+    warnings = []
 
     for file in directory.rglob("*.py"):
         if not file.is_file():
             continue
 
-        year_part = file.parts[-2]
-        is_year = len(year_part) > 1 and year_part[0] == "_" and year_part[1:].isdigit()
-        if not is_year:
-            continue
+        relative_file = file.relative_to(directory)
 
         file_name = file.name
+        is_known_file = check_is_known_file(relative_file)
+        if not is_known_file:
+            warnings.append(f"unknown file: {relative_file}")
+
         is_problem_file = (
-            file_name[0] == "p"
-            and file_name[1:3].isdigit()
-            and file_name[3] == "_"
-            and file_name[4] in ["a", "b"]
-            and file_name[5:] == ".py"
+            file_name[0] == "p" and file_name[1:3].isdigit() and file_name[3] == "_" and file_name[4:] == "a.py"
         )
         if not is_problem_file:
             continue
 
+        year_part = file.parts[-2]
         year = int(year_part[1:])
         day = int(file_name[1:3])
+
+        other_files = [file.parent / x for x in [f"p{day:02d}_b.py", f"p{day:02d}_input.txt", f"p{day:02d}_test.py"]]
+        for other_file in other_files:
+            if not other_file.exists():
+                warnings.append(f"missing file: {other_file.relative_to(directory)}")
+
         year_to_day_nums[year].add(day)
+
+    for warning in warnings:
+        print(warning)
+
+    print(f"\nFound {len(warnings)} warning(s)\n")
 
     min_year = min(year_to_day_nums)
     max_year = max(year_to_day_nums)
@@ -123,5 +133,35 @@ def check_files():
         print(s)
 
 
-# create_files(2021, 4)
-# check_files()
+def check_is_known_file(file: Path) -> bool:
+    if file.parts in [
+        (".gitignore",),
+        ("pyproject.toml",),
+        ("README.md",),
+        ("utils.py",),
+    ]:
+        return True
+
+    if len(file.parts) != 2:
+        return False
+
+    year_part = file.parts[0]
+    is_year = len(year_part) > 1 and year_part[0] == "_" and year_part[1:].isdigit()
+    if not is_year:
+        return False
+
+    file_name = file.parts[1]
+    is_known_file = (
+        file_name == "__init__.py"
+        or file.parts in [("_2019", "common.py"), ("_2019", "common_test.py")]
+        or (
+            file_name[0] == "p"
+            and file_name[1:3].isdigit()
+            and file_name[3] == "_"
+            and file_name[4:] in ["a.py", "b.py", "input.txt", "test.py"]
+        )
+    )
+    if not is_known_file:
+        return False
+
+    return True
