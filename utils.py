@@ -121,7 +121,9 @@ def check_files():
     for warning in warnings:
         print(warning)
 
-    print(f"\nFound {len(warnings)} warning(s)\n")
+    print()
+    print(f"Found {len(warnings)} warning(s)")
+    print()
 
     min_year = min(year_to_day_nums)
     max_year = max(year_to_day_nums)
@@ -131,6 +133,13 @@ def check_files():
         day_strs = [f"{day:2}" for day in sorted(day_nums)]
         s = f"{year}: " + "  ".join(day_strs)
         print(s)
+
+    num_years = max_year - min_year + 1
+    num_days = 25 * num_years
+    num_days_completed = sum(len(x) for x in year_to_day_nums.values())
+    completion_percent = round(100 * num_days_completed / num_days, 2)
+    print()
+    print(f"Completion: {num_days_completed}/{num_days} ({completion_percent} %)")
 
 
 def check_is_known_file(file: Path) -> bool:
