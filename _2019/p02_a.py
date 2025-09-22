@@ -8,4 +8,4 @@ def run(s: str) -> int:
 
     output = run_intcode(nums)
 
-    return output[0]
+    return output.nums[0]

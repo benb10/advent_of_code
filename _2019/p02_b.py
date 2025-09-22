@@ -14,7 +14,7 @@ def run(s: str) -> int | None:
 
             output = run_intcode(new_nums)
 
-            if output[0] == 19690720:
+            if output.nums[0] == 19690720:
                 return 100 * noun + verb
 
     return None
