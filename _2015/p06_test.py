@@ -13,7 +13,7 @@ def test_p06a_small():
     assert p06_a.run(s) == 4
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(9)
 def test_p06a():
     s = (Path(__file__).parent / "p06_input.txt").read_text()
 
@@ -28,7 +28,7 @@ def test_p06b_small():
     assert p06_b.run(s) == 15
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(13)
 def test_p06b():
     s = (Path(__file__).parent / "p06_input.txt").read_text()
 

@@ -41,7 +41,7 @@ def test_p07b_small():
     assert p07_b.run(s) == 11387
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(19)
 def test_p07b():
     s = (Path(__file__).parent / "p07_input.txt").read_text()
 

@@ -17,14 +17,14 @@ def test_p04a():
     assert p04_a.run(s) == 117946
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(12)
 def test_p04b_small():
     s = "abcdef"
 
     assert p04_b.run(s) == 6742839
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(7)
 def test_p04b():
     s = (Path(__file__).parent / "p04_input.txt").read_text()
 

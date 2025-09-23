@@ -20,7 +20,7 @@ def test_p15a_small():
     assert p15_a.run(s) == 40
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(3)
 def test_p15a():
     s = (Path(__file__).parent / "p15_input.txt").read_text()
 
@@ -42,7 +42,7 @@ def test_p15b_small():
     assert p15_b.run(s) == 315
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(60)
 def test_p15b():
     s = (Path(__file__).parent / "p15_input.txt").read_text()
 

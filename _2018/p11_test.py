@@ -17,14 +17,14 @@ def test_p11a():
     assert p11_a.run(s) == "243,43"
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(60)
 def test_p11b_small():
     s = "18"
 
     assert p11_b.run(s) == "90,269,16"
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(60)
 def test_p11b():
     s = (Path(__file__).parent / "p11_input.txt").read_text()
 

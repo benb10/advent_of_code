@@ -35,7 +35,7 @@ def test_p12b_small():
     assert p12_b.run(s) == 36
 
 
-@pytest.mark.skip("slow")
+@pytest.mark.runtime(25)
 def test_p12b():
     s = (Path(__file__).parent / "p12_input.txt").read_text()
 
