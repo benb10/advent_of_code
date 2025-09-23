@@ -1,3 +1,10 @@
+from .common import run_intcode
+
+
 def run(s: str) -> int:
-    lines = [line.strip() for line in s.strip().split("\n")]
-    return 0
+    nums = [int(x) for x in s.strip().split(",")]
+
+    output = run_intcode(nums, input_values=[2])
+
+    assert len(output.outputs) == 1
+    return output.outputs[0]
