@@ -289,9 +289,9 @@ from .common import IntcodeOutput, run_intcode
                 relative_base=0,
             ),
         ),
-        # test stop_on_output
+        # test stop_after_n_outputs
         (
-            dict(input_nums=[4, 1, 4, 1, 99], stop_on_output=True),
+            dict(input_nums=[4, 1, 4, 1, 99], stop_after_n_outputs=1),
             IntcodeOutput(
                 nums=[4, 1, 4, 1, 99],
                 outputs=[1],

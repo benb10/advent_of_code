@@ -16,7 +16,7 @@ def run_intcode(
     input_values: list[int] | None = None,
     instruction_pointer: int = 0,
     relative_base: int = 0,
-    stop_on_output: bool = False,
+    stop_after_n_outputs: int | None = None,
     log: bool = False,
 ) -> IntcodeOutput:
     def _log(s):
@@ -70,7 +70,7 @@ def run_intcode(
             _log(f"    adding {param_1} to outputs")
             outputs.append(param_1)
             instruction_pointer += 2
-            if stop_on_output:
+            if stop_after_n_outputs is not None and len(outputs) >= stop_after_n_outputs:
                 return IntcodeOutput(
                     nums=nums,
                     outputs=outputs,

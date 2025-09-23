@@ -30,7 +30,7 @@ def run(s: str) -> int:
                 nums,
                 input_values=input_values,
                 instruction_pointer=instruction_pointer,
-                stop_on_output=True,
+                stop_after_n_outputs=1,
             )
 
             if output.outputs:
