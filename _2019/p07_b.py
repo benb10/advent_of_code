@@ -9,38 +9,46 @@ def run(s: str) -> int:
 
     max_value = 0
     for phase_settings in permutations([5, 6, 7, 8, 9], 5):
-        print(f"\n\n\n trying phase_settings {phase_settings}")
         input_signal = 0
         amp_index_to_state = {}
         for i in range(5):
             amp_index_to_state[i] = (deepcopy(init_nums), 0)
 
-        for i in cycle([0, 1, 2, 3, 4]):
-            print(f"\nRunning amp {i}")
+        final_output = None
+
+        for it_num, i in enumerate(cycle([0, 1, 2, 3, 4])):
             nums, instruction_pointer = amp_index_to_state[i]
+            input_values = []
+
+            if it_num < 5:
+                input_values.append(phase_settings[i])
+
+            if input_signal is not None:
+                input_values.append(input_signal)
+
             output = run_intcode(
                 nums,
-                input_values=[phase_settings[i], input_signal],
+                input_values=input_values,
                 instruction_pointer=instruction_pointer,
                 stop_on_output=True,
-                log=True,
             )
 
+            if output.outputs:
+                assert len(output.outputs) == 1
+                output_signal = output.outputs[0]
+            else:
+                output_signal = None
+
             amp_index_to_state[i] = (output.nums, output.instruction_pointer)
-            if len(output.outputs) != 1:
-                a = 0
-            assert len(output.outputs) == 1
-            input_signal = output.outputs[0]
+            if i == 4 and output_signal is not None:
+                final_output = output_signal
+
+            input_signal = output_signal
 
             if i == 4 and output.program_has_completed:
                 break
 
-        if input_signal > max_value:
-            max_value = input_signal
+        if final_output is not None and final_output > max_value:
+            max_value = final_output
 
     return max_value
-
-
-# s = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"
-#
-# print(run(s))

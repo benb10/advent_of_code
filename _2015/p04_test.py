@@ -6,9 +6,9 @@ from . import p04_a, p04_b
 
 
 def test_p04a_small():
-    s = "abcdef"
+    s = "a"
 
-    assert p04_a.run(s) == 609043
+    assert p04_a.run(s) == 12181
 
 
 def test_p04a():

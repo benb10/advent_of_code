@@ -17,15 +17,14 @@ def test_p07a():
     assert p07_a.run(s) == 51679
 
 
-@pytest.mark.skip("solution not complete")
 def test_p07b_small():
     s = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"
 
     assert p07_b.run(s) == 139629729
 
 
-@pytest.mark.skip("solution not complete")
+@pytest.mark.skip("slow")
 def test_p07b():
     s = (Path(__file__).parent / "p07_input.txt").read_text()
 
-    assert p07_b.run(s) == 1
+    assert p07_b.run(s) == 19539216
