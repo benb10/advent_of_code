@@ -383,6 +383,17 @@ from .common import IntcodeOutput, run_intcode
                 relative_base=0,
             ),
         ),
+        # test stop_when_input_required
+        (
+            dict(input_nums=[3, 1, 3, 1, 4, 1, 99], input_values=[123], stop_when_input_required=True),
+            IntcodeOutput(
+                nums=[3, 123, 3, 1, 4, 1, 99],
+                outputs=[],
+                instruction_pointer=2,
+                program_has_completed=False,
+                relative_base=0,
+            ),
+        ),
     ),
 )
 def test_run_intcode(input_kwargs, expected_output):

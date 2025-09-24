@@ -17,13 +17,15 @@ def run_intcode(
     instruction_pointer: int = 0,
     relative_base: int = 0,
     stop_after_n_outputs: int | None = None,
+    stop_when_input_required: bool = False,
     log: bool = False,
 ) -> IntcodeOutput:
     def _log(s):
         if log:
             print(s)
 
-    inputs_iter = iter([]) if input_values is None else iter(input_values)
+    inputs = [] if input_values is None else deepcopy(input_values)
+
     nums = deepcopy(input_nums)
     outputs = []
 
@@ -58,7 +60,19 @@ def run_intcode(
         elif opcode == 3:
             param_1_addr = get_address_param(nums, instruction_pointer + 1, param_1_mode, relative_base)
 
-            input_value = next(inputs_iter)
+            if not inputs:
+                if stop_when_input_required:
+                    return IntcodeOutput(
+                        nums=nums,
+                        outputs=outputs,
+                        instruction_pointer=instruction_pointer,
+                        relative_base=relative_base,
+                        program_has_completed=False,
+                    )
+                else:
+                    raise ValueError("Ran out of input_values")
+
+            input_value = inputs.pop(0)
             _log(f"    setting addr {param_1_addr} to {input_value}")
             make_address_available(nums, address=param_1_addr)
             nums[param_1_addr] = input_value

@@ -144,9 +144,9 @@ def check_files():
 
 def check_is_known_file(file: Path) -> bool:
     if file.parts in [
-        (".gitignore",),
-        ("pyproject.toml",),
-        ("README.md",),
+        ("_2019", "common.py"),
+        ("_2019", "common_test.py"),
+        ("conftest.py",),
         ("utils.py",),
     ]:
         return True
@@ -160,15 +160,11 @@ def check_is_known_file(file: Path) -> bool:
         return False
 
     file_name = file.parts[1]
-    is_known_file = (
-        file_name == "__init__.py"
-        or file.parts in [("_2019", "common.py"), ("_2019", "common_test.py")]
-        or (
-            file_name[0] == "p"
-            and file_name[1:3].isdigit()
-            and file_name[3] == "_"
-            and file_name[4:] in ["a.py", "b.py", "input.txt", "test.py"]
-        )
+    is_known_file = file_name == "__init__.py" or (
+        file_name[0] == "p"
+        and file_name[1:3].isdigit()
+        and file_name[3] == "_"
+        and file_name[4:] in ["a.py", "b.py", "input.txt", "test.py"]
     )
     if not is_known_file:
         return False
@@ -176,5 +172,5 @@ def check_is_known_file(file: Path) -> bool:
     return True
 
 
-create_files(2019, 11)
+create_files(2019, 13)
 check_files()
