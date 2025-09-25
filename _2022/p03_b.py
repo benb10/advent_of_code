@@ -1,4 +1,4 @@
-from more_itertools import chunked
+from itertools import batched
 
 
 def get_priority(char: str) -> int:
@@ -12,7 +12,7 @@ def run(s: str) -> int:
     lines = [line.strip() for line in s.strip().split("\n")]
     total = 0
 
-    for group in chunked(lines, 3):
+    for group in batched(lines, 3):
         rs_1, rs_2, rs_3 = group
         in_common = set(rs_1) & set(rs_2) & set(rs_3)
         assert len(in_common) == 1

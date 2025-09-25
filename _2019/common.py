@@ -181,3 +181,33 @@ def make_address_available(nums: list[int], address: int) -> None:
         # we need to extend with zeros
         shortfall = address - len(nums) + 1
         nums.extend([0] * shortfall)
+
+
+@dataclass
+class IntcodeRunner:
+    nums: list[int]
+    instruction_pointer: int = 0
+    relative_base: int = 0
+    program_has_completed: bool = False
+
+    def run(
+        self,
+        input_values: list[int] | None = None,
+        stop_after_n_outputs: int | None = None,
+        stop_when_input_required: bool = False,
+        log: bool = False,
+    ) -> IntcodeOutput:
+        output = run_intcode(
+            input_nums=self.nums,
+            input_values=input_values,
+            instruction_pointer=self.instruction_pointer,
+            relative_base=self.relative_base,
+            stop_after_n_outputs=stop_after_n_outputs,
+            stop_when_input_required=stop_when_input_required,
+            log=log,
+        )
+        self.nums = output.nums
+        self.instruction_pointer = output.instruction_pointer
+        self.relative_base = output.relative_base
+        self.program_has_completed = output.program_has_completed
+        return output

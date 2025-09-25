@@ -1,4 +1,4 @@
-from more_itertools import chunked
+from itertools import batched
 
 
 def run(s: str) -> int | None:
@@ -7,7 +7,7 @@ def run(s: str) -> int | None:
 
     boards: list[list[list[int]]] = []
 
-    for chunk in chunked(lines[2:], 6):
+    for chunk in batched(lines[2:], 6):
         board_lines = chunk[:5]
         board = [[int(x) for x in line.split(" ") if x] for line in board_lines]
         boards.append(board)

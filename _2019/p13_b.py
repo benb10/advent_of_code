@@ -1,4 +1,4 @@
-from more_itertools import chunked
+from itertools import batched
 
 from .common import run_intcode
 
@@ -59,7 +59,7 @@ def run(s: str) -> int:
 
         last_ball_x = ball_x
 
-        for x, y, tile_id in chunked(output.outputs, 3):
+        for x, y, tile_id in batched(output.outputs, 3):
             if tile_id in [0, 1, 2, 3, 4]:
                 location_to_tile_id[(x, y)] = tile_id
                 if tile_id == 4:
