@@ -172,5 +172,5 @@ def check_is_known_file(file: Path) -> bool:
     return True
 
 
-create_files(2021, 7)
+create_files(2020, 8)
 check_files()
